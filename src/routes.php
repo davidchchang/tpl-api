@@ -7,10 +7,10 @@ use Slim\Http\Response;
 $app->get('/branches', function(Request $request, Response $response, $args) {
     $this->logger->info("Slim-Skeleton '/branches' route");
 
-    $data = array();
-    $response->withJson($data);
+    $file_contents = file_get_contents('../public/branches.json');
+    $data = json_decode($file_contents, true);
     
-    return $response;
+    return $response->withJson($data);
 });
 
 $app->get('/[{name}]', function ($request, $response, $args) {
