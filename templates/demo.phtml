@@ -1,0 +1,31 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>TPL-API demo</title>
+    <script type="application/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+<h1>TPL-API demo</h1>
+<h2>Branches:</h2>
+<ul class="branches"></ul>
+<script type="application/javascript">
+    $("document").ready(function () {
+        $.get("http://api.tpl.davidchchang.com/branches", function (data) {
+
+            // here is where you would extract any meta information you need for your app from the 'data' object
+
+            // in this example, we simply list out all of the branch names and their addresses
+
+            var branches = Object.keys(data);
+
+            var listing = branches.reduce(function(previousValue, currentValue, currentIndex, array) {
+                return previousValue + "<li>" + currentValue + " - <em>" + data[currentValue].address[0] + "</em></li>";
+            }, "");
+
+            $(".branches").html(listing);
+            alert("Loaded branches.");
+        });
+    });
+</script>
+</body>
+</html>
