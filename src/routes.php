@@ -10,7 +10,9 @@ $app->get('/branches', function(Request $request, Response $response, $args) {
     $file_contents = file_get_contents('../public/branches.json');
     $data = json_decode($file_contents, true);
 
-    return $response->withJson($data);
+    return $response
+        ->withJson($data)
+        ->withHeader('Access-Control-Allow-Origin', '*');
 });
 
 $app->get('/demo', function ($request, $response, $args) {
